@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 })
 
 export class PostCreateComponent {
-  newPost = '';
+  newPost = 'New Content Appears Here';
 
   onAddPost() {
      this.newPost = 'The user\'s Post ';
