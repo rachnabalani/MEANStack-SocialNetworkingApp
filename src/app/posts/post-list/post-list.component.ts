@@ -28,9 +28,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.postsSub = this.postsService.getPostUpdateListener()
     .subscribe((posts: Post[]) => {
       this.posts = posts; // equal the Post[] element to the new post we just recieved
-    }); //  3 arguments: function executed,
-    // called when error happens (never happening),
-    // called when observable is completed/no more values expected (never happening)
+    });
   }
 
   ngOnDestroy() {
