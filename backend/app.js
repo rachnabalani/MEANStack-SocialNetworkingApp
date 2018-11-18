@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -8,28 +9,18 @@ const app = express();
 
 mongoose
   .connect(
-    "mongodb+srv://User:4ihAZKpFUEmCjnkn@cluster0-9thfn.mongodb.net/test?retryWrites=true"
+    "mongodb+srv://max:QuBqs0T45GDKPlIG@cluster0-ntrwp.mongodb.net/node-angular?retryWrites=true"
   )
-  .then( () => {
-    //creating a time stamp for console to know each time local server was restarted and connected to database
-   var DEBUG = (function(){
-    var timestamp = function(){};
-    timestamp.toString = function(){
-        return "[DEBUG TimeStamp " + (new Date).toLocaleTimeString() + "]";
-    };
-    return {
-        log: console.log.bind(console, '%s', timestamp)
-    }
-  })();
-  // calling the debug var for timestamp on console:
-  DEBUG.log(" Connected to MongoDB database! ");
+  .then(() => {
+    console.log("Connected to database!");
   })
-  .catch(()=> {
-    console.log('Connection failed!');
+  .catch(() => {
+    console.log("Connection failed!");
   });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use("/images", express.static(path.join("backend/images")));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
