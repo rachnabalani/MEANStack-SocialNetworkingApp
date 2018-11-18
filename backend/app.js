@@ -10,11 +10,22 @@ mongoose
   .connect(
     "mongodb+srv://User:4ihAZKpFUEmCjnkn@cluster0-9thfn.mongodb.net/test?retryWrites=true"
   )
-  .then(() => {
-    console.log("Connected to database!");
+  .then( () => {
+    //creating a time stamp for console to know each time local server was restarted and connected to database
+   var DEBUG = (function(){
+    var timestamp = function(){};
+    timestamp.toString = function(){
+        return "[DEBUG TimeStamp " + (new Date).toLocaleTimeString() + "]";
+    };
+    return {
+        log: console.log.bind(console, '%s', timestamp)
+    }
+  })();
+  // calling the debug var for timestamp on console:
+  DEBUG.log(" Connected to MongoDB database! ");
   })
-  .catch(() => {
-    console.log("Connection failed!");
+  .catch(()=> {
+    console.log('Connection failed!');
   });
 
 app.use(bodyParser.json());
